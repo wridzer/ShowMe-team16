@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class Movement : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private GameObject cameraInstance;
     [SerializeField] private Vector3 thirdPersonView = new Vector3(-3, 2, 0);
     [SerializeField] private Vector3 firstPersonView = new Vector3(0, 0.5f, 0);
+    private Camera cam;
     private bool photoMode = false;
+    public int fileCounter = 0;
 
     private Rigidbody rb;
 
@@ -19,6 +22,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cam = cameraInstance.GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -28,6 +32,7 @@ public class Movement : MonoBehaviour
         if (photoMode)
         {
             Rotate(camLookSpeed);
+            Photomode();
         }
         if (!photoMode)
         {
@@ -62,22 +67,39 @@ public class Movement : MonoBehaviour
     {
         if (photoMode)
         {
-            cameraInstance.transform.localPosition = thirdPersonView;
+            //cameraInstance.transform.localPosition = thirdPersonView;
         }
         if (!photoMode)
         {
-            cameraInstance.transform.localPosition = firstPersonView;
+            //cameraInstance.transform.localPosition = firstPersonView;
         }
         photoMode = !photoMode;
     }
 
     private void Photomode()
     {
-
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            TakePhoto();
+        }
     }
 
     private void TakePhoto()
     {
+        RenderTexture activeRenderTexture = RenderTexture.active;
+        RenderTexture.active = cam.targetTexture;
 
+        cam.Render();
+
+        Texture2D image = new Texture2D(cam.targetTexture.width, cam.targetTexture.height);
+        image.ReadPixels(new Rect(0, 0, cam.targetTexture.width, cam.targetTexture.height), 0, 0);
+        image.Apply();
+        RenderTexture.active = activeRenderTexture;
+
+        byte[] bytes = image.EncodeToPNG();
+        Destroy(image);
+
+        File.WriteAllBytes(Application.dataPath + "/Pics/" + fileCounter + ".png", bytes);
+        fileCounter++;
     }
 }
