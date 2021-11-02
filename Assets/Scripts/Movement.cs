@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float maxSpeed = 20;
     [SerializeField] private float rotateWalkSpeed = 50;
     [SerializeField] private float camLookSpeed = 25;
+    [SerializeField] private GameObject mainCameraInstance;
     [SerializeField] private GameObject cameraInstance;
     [SerializeField] private Vector3 thirdPersonView = new Vector3(-3, 2, 0);
     [SerializeField] private Vector3 firstPersonView = new Vector3(0, 0.5f, 0);
@@ -67,11 +68,11 @@ public class Movement : MonoBehaviour
     {
         if (photoMode)
         {
-            //cameraInstance.transform.localPosition = thirdPersonView;
+            mainCameraInstance.transform.localPosition = thirdPersonView;
         }
         if (!photoMode)
         {
-            //cameraInstance.transform.localPosition = firstPersonView;
+            mainCameraInstance.transform.localPosition = firstPersonView;
         }
         photoMode = !photoMode;
     }

@@ -255,6 +255,7 @@ MonoBehaviour:
   maxSpeed: 5
   rotateWalkSpeed: 50
   camLookSpeed: 25
+  mainCameraInstance: {fileID: 963194225}
   cameraInstance: {fileID: 1219194053}
   thirdPersonView: {x: -3, y: 2, z: 0}
   firstPersonView: {x: 0, y: 0.5, z: 0}
@@ -521,7 +522,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1219194056}
   - component: {fileID: 1219194055}
-  - component: {fileID: 1219194054}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -529,14 +529,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1219194054
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219194053}
-  m_Enabled: 1
 --- !u!20 &1219194055
 Camera:
   m_ObjectHideFlags: 0
