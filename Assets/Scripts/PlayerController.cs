@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 thirdPersonView = new Vector3(-3, 2, 0);
     [SerializeField] private Vector3 firstPersonView = new Vector3(0, 0.5f, 0);
     [SerializeField] private GameObject cameraOverlay;
+    [SerializeField] private GameObject scrapBook;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             SwitchMode();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && !photoMode)
+        {
+            scrapBook.SetActive(!scrapBook.activeSelf);
         }
     }
 

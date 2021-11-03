@@ -78,4 +78,10 @@ public class PhotoMode : MonoBehaviour
         yield return new WaitForSeconds(photoDisplayTimer);
         imageDisplay.SetActive(false);
     }
+
+    private void OnDisable()
+    {
+        volume.profile.TryGetSettings(out depthOfField);
+        depthOfField.focalLength.value = 1;
+    }
 }
