@@ -6,10 +6,10 @@ using System.IO;
 
 public class Scrapbook : MonoBehaviour
 {
-    private string myPath = "/Pics/";
     [SerializeField] private GameObject imageHolder;
     private List<GameObject> scrapbookHolder = new List<GameObject>();
 
+    //When the menu opens it loads all images
     private void OnEnable()
     {
         List<Texture2D> pictures = new List<Texture2D>();
@@ -22,6 +22,8 @@ public class Scrapbook : MonoBehaviour
         }
     }
 
+    //Destroys all images when menu closes
+    //so it can load new on enable
     private void OnDisable()
     {
         foreach (GameObject image in scrapbookHolder)

@@ -20,19 +20,19 @@ public class PhotoMode : MonoBehaviour
     private DepthOfField depthOfField;
     private Camera cam;
 
-    // Start is called before the first frame update
     void Start()
     {
         volume = postprocessing.GetComponent<PostProcessVolume>();
         cam = cameraInstance.GetComponent<Camera>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         Photomode();
     }
 
+    //Handles focus and makes picture
     private void Photomode()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -45,28 +45,32 @@ public class PhotoMode : MonoBehaviour
         depthOfField.focalLength.value = focus;
     }
 
+    //takes photo
     private void TakePhoto()
     {
+        //Creates rendertexture
         RenderTexture activeRenderTexture = RenderTexture.active;
         RenderTexture.active = cam.targetTexture;
 
+        //Let camera render
         cam.Render();
 
+        //Add render to rendertexture
         Texture2D image = new Texture2D(cam.targetTexture.width, cam.targetTexture.height);
         image.ReadPixels(new Rect(0, 0, cam.targetTexture.width, cam.targetTexture.height), 0, 0);
         image.Apply();
         RenderTexture.active = activeRenderTexture;
 
-        //byte[] bytes = image.EncodeToPNG();
+        //Display and save image
         DisplayImage(image);
         ImageDatabase.AddPhoto(fileCounter, image);
-        GetComponent<PlayerController>().SwitchMode();
-        //Destroy(image);
 
-        //File.WriteAllBytes(Application.dataPath + "/Pics/" + fileCounter + ".png", bytes);
+        //switch playermode and add to filecounter
+        GetComponent<PlayerController>().SwitchMode();
         fileCounter++;
     }
 
+    //Display image
     private void DisplayImage(Texture2D _photo)
     {
         imageDisplay.GetComponent<RawImage>().texture = _photo;
@@ -74,12 +78,14 @@ public class PhotoMode : MonoBehaviour
         StartCoroutine(photoTimer());
     }
 
+    //Times photodisplay after capture
     private IEnumerator photoTimer()
     {
         yield return new WaitForSeconds(photoDisplayTimer);
         imageDisplay.SetActive(false);
     }
 
+    //Resets focus
     private void OnDisable()
     {
         volume.profile.TryGetSettings(out depthOfField);

@@ -14,7 +14,8 @@ public class LookRotation : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+    //Check what mode the player is in
+    //so it knows how fast to rotate
     void Update()
     {
         float currentRotSpeed;
@@ -30,6 +31,7 @@ public class LookRotation : MonoBehaviour
         Rotate(currentRotSpeed);
     }
 
+    //Calculates the rotation
     private void Rotate(float _rotateSpeed)
     {
         float mouseX = Input.GetAxis("Mouse X");

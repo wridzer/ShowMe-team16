@@ -11,13 +11,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject cameraOverlay;
     [SerializeField] private GameObject scrapBook;
 
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
+    //Handles the photomode and scrapbook
     void Update()
     {
         switch (photoMode)
@@ -47,11 +46,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Changes photomode
     public void SwitchMode()
     {
         photoMode = !photoMode;
     }
 
+    //Move camera on mode change
     private void moveCam(Vector3 _camPos)
     {
         mainCameraInstance.transform.localPosition = _camPos;
