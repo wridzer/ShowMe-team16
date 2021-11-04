@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269cda8adbdbd604d93ee26c8913c38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageHolder: {fileID: 8435412387867256755, guid: ded7c7090cb1c5942ad61ddeeb1a6e46, type: 3}
+  imageHolder: {fileID: 8706542553471406594, guid: ded7c7090cb1c5942ad61ddeeb1a6e46, type: 3}
 --- !u!1 &1759602788
 GameObject:
   m_ObjectHideFlags: 0

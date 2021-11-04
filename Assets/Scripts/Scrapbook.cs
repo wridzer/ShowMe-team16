@@ -12,12 +12,13 @@ public class Scrapbook : MonoBehaviour
 
     private void OnEnable()
     {
-        Object[] images = Resources.LoadAll(Application.dataPath + myPath, typeof(Image));
-        foreach (Image img in images)
+        List<Texture2D> pictures = new List<Texture2D>();
+        pictures = ImageDatabase.GetEveryPhoto();
+        foreach (Texture2D img in pictures)
         {
             GameObject tempImg = Instantiate(imageHolder, gameObject.transform);
             scrapbookHolder.Add(tempImg);
-            tempImg.GetComponent<Image>().sprite = img.sprite;
+            tempImg.GetComponent<RawImage>().texture = img;
         }
     }
 

@@ -57,12 +57,13 @@ public class PhotoMode : MonoBehaviour
         image.Apply();
         RenderTexture.active = activeRenderTexture;
 
-        byte[] bytes = image.EncodeToPNG();
+        //byte[] bytes = image.EncodeToPNG();
         DisplayImage(image);
+        ImageDatabase.AddPhoto(fileCounter, image);
         GetComponent<PlayerController>().SwitchMode();
         //Destroy(image);
 
-        File.WriteAllBytes(Application.dataPath + "/Pics/" + fileCounter + ".png", bytes);
+        //File.WriteAllBytes(Application.dataPath + "/Pics/" + fileCounter + ".png", bytes);
         fileCounter++;
     }
 
