@@ -7,11 +7,13 @@ public class LookRotation : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float walkModeLookSpeed = 50;
     [SerializeField] private float camModeLookSpeed = 25;
+    private PlayerController controller;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        controller = GetComponent<PlayerController>();
     }
 
     //Check what mode the player is in
@@ -19,14 +21,13 @@ public class LookRotation : MonoBehaviour
     void Update()
     {
         float currentRotSpeed;
-        switch (GetComponent<PlayerController>().photoMode)
+        if (controller.photoMode)
         {
-            case true:
                 currentRotSpeed = camModeLookSpeed;
-                break;
-            case false:
+        }
+        else
+        {
                 currentRotSpeed = walkModeLookSpeed;
-                break;
         }
         Rotate(currentRotSpeed);
     }

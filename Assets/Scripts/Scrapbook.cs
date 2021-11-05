@@ -12,13 +12,13 @@ public class Scrapbook : MonoBehaviour
     //When the menu opens it loads all images
     private void OnEnable()
     {
-        List<Texture2D> pictures = new List<Texture2D>();
+        List<Photo> pictures = new List<Photo>();
         pictures = ImageDatabase.GetEveryPhoto();
-        foreach (Texture2D img in pictures)
+        foreach (Photo img in pictures)
         {
             GameObject tempImg = Instantiate(imageHolder, gameObject.transform);
             scrapbookHolder.Add(tempImg);
-            tempImg.GetComponent<RawImage>().texture = img;
+            tempImg.GetComponent<RawImage>().texture = img.photo;
         }
     }
 

@@ -19,15 +19,20 @@ public class PhotoMode : MonoBehaviour
     [SerializeField] private float minFocus = 5;
     [SerializeField] private float apatureMin = 10;
     [SerializeField] private float apatureMax = 32;
+    [SerializeField] private float addShake;
+    [SerializeField] private AudioClip endOffFocus;
+    [SerializeField] private AudioClip captureSound;
     private int fileCounter = 0;
     private PostProcessVolume volume;
     private DepthOfField depthOfField;
     private Camera cam;
+    private AudioSource audioS;
 
     void Start()
     {
         volume = postprocessing.GetComponent<PostProcessVolume>();
         cam = cameraInstance.GetComponent<Camera>();
+        audioS = GetComponent<AudioSource>();
     }
 
     
@@ -64,11 +69,15 @@ public class PhotoMode : MonoBehaviour
 
         //Display and save image
         DisplayImage(image);
-        ImageDatabase.AddPhoto(fileCounter, image);
+        Photo photo = new Photo();
+        photo.photo = image;
+        photo.timeWhenTaken = Time.realtimeSinceStartup;
+        ImageDatabase.AddPhoto(fileCounter, photo);
 
-        //switch playermode and add to filecounter
+        //switch playermode and add to filecounter and playsound
         GetComponent<PlayerController>().SwitchMode();
         fileCounter++;
+        audioS.PlayOneShot(captureSound);
     }
 
     //Display image
@@ -101,9 +110,17 @@ public class PhotoMode : MonoBehaviour
         focus += scroll * Time.deltaTime;
         focus = Mathf.Clamp(focus, minFocus, maxFocus);
         depthOfField.focusDistance.value = focus;
-        if(focus == minFocus || focus == maxFocus)
+        if(focus == minFocus)
         {
-            //TODO
+            focus++;
+            GetComponent<PlayerController>().shake += addShake;
+            audioS.PlayOneShot(endOffFocus);
+        }
+        if (focus == maxFocus)
+        {
+            focus--;
+            GetComponent<PlayerController>().shake += addShake;
+            audioS.PlayOneShot(endOffFocus);
         }
         //Time.timeScale = 1 - (focus / 100);
         depthOfField.aperture.value = apatureMax + (focus - 5) / (minFocus - maxFocus) * (apatureMax - apatureMin);

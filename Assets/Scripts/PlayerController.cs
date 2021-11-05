@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject cameraOverlay;
     [SerializeField] private GameObject scrapBook;
 
+    public float shake  = 0;
+    [SerializeField] private float shakeAmount  = 0.7f;
+    [SerializeField] private float decreaseFactor  = 1.0f;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -19,20 +23,17 @@ public class PlayerController : MonoBehaviour
     //Handles the photomode and scrapbook
     void Update()
     {
-        switch (photoMode)
+        if (photoMode)
         {
-            case true:
-                GetComponent<Movement>().enabled = false;
-                GetComponent<PhotoMode>().enabled = true;
-                moveCam(firstPersonView);
-                cameraOverlay.SetActive(true);
-                break;
-            case false:
-                GetComponent<Movement>().enabled = true;
-                GetComponent<PhotoMode>().enabled = false;
-                moveCam(thirdPersonView);
-                cameraOverlay.SetActive(false);
-                break;
+            GetComponent<PhotoMode>().enabled = true;
+            moveCam(firstPersonView);
+            cameraOverlay.SetActive(true);
+            scrapBook.SetActive(false);
+        }
+        else {
+            GetComponent<PhotoMode>().enabled = false;
+            moveCam(thirdPersonView);
+            cameraOverlay.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -44,6 +45,8 @@ public class PlayerController : MonoBehaviour
         {
             scrapBook.SetActive(!scrapBook.activeSelf);
         }
+
+        ScreenShake();
     }
 
     //Changes photomode
@@ -56,5 +59,19 @@ public class PlayerController : MonoBehaviour
     private void moveCam(Vector3 _camPos)
     {
         mainCameraInstance.transform.localPosition = _camPos;
+    }
+
+    private void ScreenShake()
+    {
+        if (shake > 0)
+        {
+            mainCameraInstance.transform.localPosition = Random.insideUnitSphere * shakeAmount;
+            shake -= Time.deltaTime * decreaseFactor;
+
+        }
+        else
+        {
+            shake = 0;
+        }
     }
 }

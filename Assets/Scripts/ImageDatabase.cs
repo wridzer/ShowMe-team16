@@ -5,10 +5,10 @@ using UnityEngine;
 public static class ImageDatabase
 {
     //Dictionary that holds the images
-    private static Dictionary<int, Texture2D> takenPictures = new Dictionary<int, Texture2D>();
+    private static Dictionary<int, Photo> takenPictures = new Dictionary<int, Photo>();
 
     //for adding pictures to database
-    public static void AddPhoto(int _number, Texture2D _photo)
+    public static void AddPhoto(int _number, Photo _photo)
     {
         takenPictures.Add(_number, _photo);
     }
@@ -20,16 +20,16 @@ public static class ImageDatabase
     }
 
     //for getting a specific picture from database
-    public static Texture2D GetSpecificPhoto(int _number)
+    public static Photo GetSpecificPhoto(int _number)
     {
         return takenPictures[_number];
     }
 
     //getting all photos
-    public static List<Texture2D> GetEveryPhoto()
+    public static List<Photo> GetEveryPhoto()
     {
-        List<Texture2D> photos = new List<Texture2D>();
-        foreach(KeyValuePair<int, Texture2D> entry in takenPictures)
+        List<Photo> photos = new List<Photo>();
+        foreach(KeyValuePair<int, Photo> entry in takenPictures)
         {
             photos.Add(entry.Value);
         }
