@@ -14,7 +14,11 @@ public class PhotoMode : MonoBehaviour
     [SerializeField] private GameObject cameraInstance;
     [SerializeField] private GameObject postprocessing;
     [SerializeField] private GameObject imageDisplay;
-    [SerializeField] private float focus = 300f;
+    [SerializeField] private float focus = 5;
+    [SerializeField] private float maxFocus = 75;
+    [SerializeField] private float minFocus = 5;
+    [SerializeField] private float apatureMin = 10;
+    [SerializeField] private float apatureMax = 32;
     private int fileCounter = 0;
     private PostProcessVolume volume;
     private DepthOfField depthOfField;
@@ -39,10 +43,7 @@ public class PhotoMode : MonoBehaviour
         {
             TakePhoto();
         }
-        float scroll = Input.GetAxis("Mouse ScrollWheel") * 1000 * focusSpeed;
-        volume.profile.TryGetSettings(out depthOfField);
-        focus -= scroll * Time.deltaTime;
-        depthOfField.focalLength.value = focus;
+        FocusControl();
     }
 
     //takes photo
@@ -89,6 +90,24 @@ public class PhotoMode : MonoBehaviour
     private void OnDisable()
     {
         volume.profile.TryGetSettings(out depthOfField);
-        depthOfField.focalLength.value = 1;
+        depthOfField.focusDistance.value = 1;
+    }
+
+    //Focussing/Controlling postprocessing
+    private void FocusControl()
+    {
+        float scroll = Input.GetAxis("Mouse ScrollWheel") * 100 * focusSpeed;
+        volume.profile.TryGetSettings(out depthOfField);
+        focus += scroll * Time.deltaTime;
+        focus = Mathf.Clamp(focus, minFocus, maxFocus);
+        depthOfField.focusDistance.value = focus;
+        if(focus == minFocus || focus == maxFocus)
+        {
+            //TODO
+        }
+        //Time.timeScale = 1 - (focus / 100);
+        depthOfField.aperture.value = apatureMax + (focus - 5) / (minFocus - maxFocus) * (apatureMax - apatureMin);
+        Debug.Log(focus);
+        Debug.Log(depthOfField.aperture.value);
     }
 }
