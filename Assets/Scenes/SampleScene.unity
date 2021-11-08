@@ -422,8 +422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498ebf000d4ab0f41bddb61de094229e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedNormal: 5
-  moveSpeedCamera: 3
+  moveSpeedNormal: 10
+  moveSpeedCamera: 7.5
   maxSpeed: 5
 --- !u!114 &630160232
 MonoBehaviour:
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630160225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd166f1b0a720bb48b06ff52ca43ed15, type: 3}
   m_Name: 
@@ -447,6 +447,7 @@ MonoBehaviour:
   minFocus: 5
   apatureMin: 10
   apatureMax: 32
+  focalLength: 227
   addShake: 0.2
   endOffFocus: {fileID: 8300000, guid: 298712b9e2c6f674f85ccb5f5ba8d821, type: 3}
   captureSound: {fileID: 8300000, guid: 34857116155630f4a86e230723376752, type: 3}

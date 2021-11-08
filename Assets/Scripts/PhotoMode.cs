@@ -19,6 +19,7 @@ public class PhotoMode : MonoBehaviour
     [SerializeField] private float minFocus = 5;
     [SerializeField] private float apatureMin = 10;
     [SerializeField] private float apatureMax = 32;
+    [SerializeField] private float focalLength = 227;
     [SerializeField] private float addShake;
     [SerializeField] private AudioClip endOffFocus;
     [SerializeField] private AudioClip captureSound;
@@ -33,6 +34,8 @@ public class PhotoMode : MonoBehaviour
         volume = postprocessing.GetComponent<PostProcessVolume>();
         cam = cameraInstance.GetComponent<Camera>();
         audioS = GetComponent<AudioSource>();
+        volume.profile.TryGetSettings(out depthOfField);
+        depthOfField.focalLength.value = focalLength;
     }
 
     
@@ -100,6 +103,8 @@ public class PhotoMode : MonoBehaviour
     {
         volume.profile.TryGetSettings(out depthOfField);
         depthOfField.focusDistance.value = 1;
+        depthOfField.aperture.value = 32;
+        depthOfField.focalLength.value = 1;
     }
 
     //Focussing/Controlling postprocessing
