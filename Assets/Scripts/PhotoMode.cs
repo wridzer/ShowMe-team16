@@ -14,6 +14,7 @@ public class PhotoMode : MonoBehaviour
     [SerializeField] private GameObject cameraInstance;
     [SerializeField] private GameObject postprocessing;
     [SerializeField] private GameObject imageDisplay;
+    [SerializeField] private GameObject flash;
     [SerializeField] private float focus = 5;
     [SerializeField] private float maxFocus = 75;
     [SerializeField] private float minFocus = 5;
@@ -81,6 +82,7 @@ public class PhotoMode : MonoBehaviour
         GetComponent<PlayerController>().SwitchMode();
         fileCounter++;
         audioS.PlayOneShot(captureSound);
+        flash.SetActive(true);
     }
 
     //Display image
