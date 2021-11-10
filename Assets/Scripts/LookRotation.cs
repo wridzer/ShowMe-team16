@@ -7,6 +7,9 @@ public class LookRotation : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float walkModeLookSpeed = 50;
     [SerializeField] private float camModeLookSpeed = 25;
+    [SerializeField] private float minY = -45;
+    [SerializeField] private float maxY = 90;
+    [SerializeField] private GameObject cameraInstance;
     private PlayerController controller;
 
     // Start is called before the first frame update
@@ -36,9 +39,10 @@ public class LookRotation : MonoBehaviour
     private void Rotate(float _rotateSpeed)
     {
         float mouseX = Input.GetAxis("Mouse X");
-        //float mouseY = Input.GetAxis("Mouse Y");
+        float mouseY = Input.GetAxis("Mouse Y");
         Vector3 rotation = new Vector3(0, mouseX, 0).normalized * _rotateSpeed * Time.deltaTime;
         Quaternion deltaRotation = Quaternion.Euler(rotation);
         rb.MoveRotation(rb.rotation * deltaRotation);
+        cameraInstance.transform.eulerAngles += new Vector3(-mouseY, 0, 0).normalized * (_rotateSpeed / 2) * Time.deltaTime;
     }
 }

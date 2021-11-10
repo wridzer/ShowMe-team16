@@ -127,6 +127,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ff817427aaab1684e8be12270e78bf6d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: db173c354c9c42b48b2669376059dc53, type: 2}
     - target: {fileID: 919132149155446097, guid: ff817427aaab1684e8be12270e78bf6d, type: 3}
       propertyPath: m_Name
       value: Birch_Trunks
@@ -201,6 +205,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f4ca2f30eca5a5741ac2e4f0b1d6e987, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0bce8b2313547fa41a6fb6691c870d08, type: 2}
     - target: {fileID: 919132149155446097, guid: f4ca2f30eca5a5741ac2e4f0b1d6e987, type: 3}
       propertyPath: m_Name
       value: Tree
@@ -275,6 +283,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f4ca2f30eca5a5741ac2e4f0b1d6e987, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0bce8b2313547fa41a6fb6691c870d08, type: 2}
     - target: {fileID: 919132149155446097, guid: f4ca2f30eca5a5741ac2e4f0b1d6e987, type: 3}
       propertyPath: m_Name
       value: Tree (1)

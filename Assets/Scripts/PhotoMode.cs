@@ -37,6 +37,7 @@ public class PhotoMode : MonoBehaviour
         audioS = GetComponent<AudioSource>();
         volume.profile.TryGetSettings(out depthOfField);
         depthOfField.focalLength.value = focalLength;
+        focus = 6;
     }
 
     

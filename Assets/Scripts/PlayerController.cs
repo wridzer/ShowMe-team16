@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 thirdPersonView = new Vector3(-3, 2, 0);
     [SerializeField] private Vector3 firstPersonView = new Vector3(0, 0.5f, 0);
     [SerializeField] private GameObject cameraOverlay;
+    [SerializeField] private GameObject walkOverlay;
     [SerializeField] private GameObject scrapBook;
 
     public float shake  = 0;
@@ -28,12 +29,14 @@ public class PlayerController : MonoBehaviour
             GetComponent<PhotoMode>().enabled = true;
             moveCam(firstPersonView);
             cameraOverlay.SetActive(true);
+            walkOverlay.SetActive(false);
             scrapBook.SetActive(false);
         }
         else {
             GetComponent<PhotoMode>().enabled = false;
             moveCam(thirdPersonView);
             cameraOverlay.SetActive(false);
+            walkOverlay.SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
